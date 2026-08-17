@@ -15,22 +15,25 @@ class StudentProfileApp extends StatelessWidget {
 
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFF0F0F0F),
+
+        scaffoldBackgroundColor: const Color(0xFF0B0B0F),
 
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF8B5CF6),
           brightness: Brightness.dark,
         ),
 
+        fontFamily: 'Arial',
+
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xFF0B0B0F),
           foregroundColor: Colors.white,
-          centerTitle: true,
+          elevation: 0,
         ),
 
         cardTheme: const CardThemeData(
-          color: Color(0xFF181818),
-          elevation: 4,
+          color: Color(0xFF15151C),
+          elevation: 0,
         ),
       ),
 
@@ -39,80 +42,154 @@ class StudentProfileApp extends StatelessWidget {
   }
 }
 
-
 class StudentProfilePage extends StatelessWidget {
   const StudentProfilePage({super.key});
 
-  // Purple colors
   static const Color purple = Color(0xFF8B5CF6);
   static const Color lightPurple = Color(0xFFA78BFA);
-  static const Color darkBackground = Color(0xFF0F0F0F);
-  static const Color darkCard = Color(0xFF181818);
+  static const Color darkBackground = Color(0xFF0B0B0F);
+  static const Color cardColor = Color(0xFF15151C);
+  static const Color softCard = Color(0xFF1B1B24);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Student Profile',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        title: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.person_outline,
+              color: lightPurple,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Student Profile',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
-      ),
 
-    
+        actions: [
+          IconButton(
+            tooltip: 'About Me',
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: cardColor,
+                    title: const Text(
+                      'About Me',
+                      style: TextStyle(
+                        color: lightPurple,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    content: const Text(
+                      'I am a BSIT student interested in '
+                      'programming, technology, web development, '
+                      'and software development.',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-           
+            // ============================================================
+            // HERO SECTION
+            // ============================================================
 
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(25),
+              margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              padding: const EdgeInsets.fromLTRB(24, 35, 24, 30),
 
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
                   colors: [
-                    Color(0xFF1A0B2E),
-                    Colors.black,
+                    Color(0xFF26104A),
+                    Color(0xFF120D1C),
+                    Color(0xFF08080B),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
 
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(35),
-                  bottomRight: Radius.circular(35),
+                borderRadius: BorderRadius.circular(30),
+
+                border: Border.all(
+                  color: purple.withValues(alpha: 0.45),
+                  width: 1.2,
                 ),
+
+                boxShadow: [
+                  BoxShadow(
+                    color: purple.withValues(alpha: 0.15),
+                    blurRadius: 30,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
 
               child: Column(
                 children: [
-                 
+                  // PROFILE IMAGE
                   Container(
-                    width: 130,
-                    height: 130,
-                    padding: const EdgeInsets.all(4),
+                    width: 145,
+                    height: 145,
+
+                    padding: const EdgeInsets.all(5),
 
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: purple,
-                        width: 4,
+
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color(0xFFA78BFA),
+                          Color(0xFF7C3AED),
+                          Color(0xFF4C1D95),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+
+                      boxShadow: [
+                        BoxShadow(
+                          color: purple.withValues(alpha: 0.5),
+                          blurRadius: 25,
+                          spreadRadius: 3,
+                        ),
+                      ],
                     ),
 
                     child: CircleAvatar(
-                      radius: 60,
                       backgroundColor: Colors.black,
 
                       child: ClipOval(
                         child: Image.asset(
                           'assets/ReivenPicture.jpg',
-                          width: 118,
-                          height: 118,
+
+                          width: 135,
+                          height: 135,
+
                           fit: BoxFit.cover,
 
                           errorBuilder: (
@@ -122,7 +199,7 @@ class StudentProfilePage extends StatelessWidget {
                           ) {
                             return const Icon(
                               Icons.person,
-                              size: 70,
+                              size: 75,
                               color: lightPurple,
                             );
                           },
@@ -131,7 +208,7 @@ class StudentProfilePage extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 18),
+                  const SizedBox(height: 22),
 
                   const Text(
                     'JHON REIVEN NONSOL',
@@ -139,101 +216,44 @@ class StudentProfilePage extends StatelessWidget {
 
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.5,
                     ),
                   ),
 
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 7),
 
                   const Text(
                     '"Kaka"',
                     style: TextStyle(
                       color: lightPurple,
-                      fontSize: 17,
+                      fontSize: 18,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 18),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  // COURSE / YEAR
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 10,
+                    runSpacing: 10,
                     children: [
-                      // BSIT
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 9,
-                        ),
-
-                        decoration: BoxDecoration(
-                          color: purple.withValues(alpha: 0.20),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: purple,
-                          ),
-                        ),
-
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.school,
-                              color: lightPurple,
-                              size: 18,
-                            ),
-
-                            SizedBox(width: 6),
-
-                            Text(
-                              'BSIT',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      _badge(
+                        icon: Icons.school_outlined,
+                        text: 'BS Information Technology',
                       ),
 
-                      const SizedBox(width: 10),
+                      _badge(
+                        icon: Icons.person_outline,
+                        text: '3rd Year',
+                      ),
 
-                    
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 9,
-                        ),
-
-                        decoration: BoxDecoration(
-                          color: purple.withValues(alpha: 0.20),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: purple,
-                          ),
-                        ),
-
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: lightPurple,
-                              size: 18,
-                            ),
-
-                            SizedBox(width: 6),
-
-                            Text(
-                              '3rd Year',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      _badge(
+                        icon: Icons.class_outlined,
+                        text: '3IT-B',
                       ),
                     ],
                   ),
@@ -241,474 +261,814 @@ class StudentProfilePage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 28),
+            const SizedBox(height: 25),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
+            // ============================================================
+            // QUICK STATS
+            // ============================================================
 
-              child: Align(
-                alignment: Alignment.centerLeft,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
 
-                child: Text(
-                  'Personal Information',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: lightPurple,
-                  ),
-                ),
-              ),
-            ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth;
 
-            const SizedBox(height: 10),
+                  double itemWidth;
 
-            Card(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+                  if (width >= 900) {
+                    itemWidth = (width - 24) / 3;
+                  } else if (width >= 550) {
+                    itemWidth = (width - 12) / 2;
+                  } else {
+                    itemWidth = width;
+                  }
 
-              child: Padding(
-                padding: const EdgeInsets.all(8),
+                  return Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
 
-                child: Column(
-                  children: const [
-                    // FULL NAME
-                    ListTile(
-                      leading: Icon(
-                        Icons.person,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Full Name',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                    children: [
+                      SizedBox(
+                        width: itemWidth,
+                        child: _statCard(
+                          icon: Icons.cake_outlined,
+                          number: '20',
+                          label: 'Years Old',
                         ),
                       ),
 
-                      subtitle: Text(
-                        'Jhon Reiven Nonsol',
-                      ),
-                    ),
-
-                    Divider(),
-
-                 
-                    ListTile(
-                      leading: Icon(
-                        Icons.badge,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Nickname',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: itemWidth,
+                        child: _statCard(
+                          icon: Icons.code,
+                          number: '4+',
+                          label: 'Languages',
                         ),
                       ),
 
-                      subtitle: Text(
-                        'Kaka',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    // AGE
-                    ListTile(
-                      leading: Icon(
-                        Icons.cake,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Age',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: itemWidth,
+                        child: _statCard(
+                          icon: Icons.terminal,
+                          number: '3+',
+                          label: 'Tech Skills',
                         ),
                       ),
-
-                      subtitle: Text(
-                        '20 years old',
-                      ),
-                    ),
-
-                    Divider(),
-
-                   
-                    ListTile(
-                      leading: Icon(
-                        Icons.calendar_month,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Birthday',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        'November 08, 2005',
-                      ),
-                    ),
-
-                    Divider(),
-
-                   
-                    ListTile(
-                      leading: Icon(
-                        Icons.location_on,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Address',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        'Cabuyao, Laguna',
-                      ),
-                    ),
-
-                    Divider(),
-
-                  
-                    ListTile(
-                      leading: Icon(
-                        Icons.sports_esports,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Hobby',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        'Programming, Gaming, and Technology',
-                      ),
-                    ),
-
-                    Divider(),
-
-                  
-                    ListTile(
-                      leading: Icon(
-                        Icons.format_quote,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Motto',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        'Kung hindi mo sila kayang pigilan, '
-                        'ito nalang ay iyong sabayan.',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    // COURSE
-                    ListTile(
-                      leading: Icon(
-                        Icons.school,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Course / Program',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        'Bachelor of Science in Information Technology',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    
-                    ListTile(
-                      leading: Icon(
-                        Icons.groups,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Year Level',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        '3rd Year',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    // SECTION
-                    ListTile(
-                      leading: Icon(
-                        Icons.class_,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Section',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        '3IT-B',
-                      ),
-                    ),
-                  ],
-                ),
+                    ],
+                  );
+                },
               ),
             ),
 
-            const SizedBox(height: 28),
+            const SizedBox(height: 35),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
+            // ============================================================
+            // PERSONAL INFORMATION
+            // ============================================================
 
-              child: Align(
-                alignment: Alignment.centerLeft,
+            _sectionTitle(
+              icon: Icons.person_outline,
+              title: 'Personal Information',
+              subtitle: 'A quick look at who I am',
+            ),
 
-                child: Text(
-                  'Academic Information',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: lightPurple,
-                  ),
-                ),
+            const SizedBox(height: 15),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth;
+
+                  double itemWidth;
+
+                  if (width >= 850) {
+                    itemWidth = (width - 12) / 2;
+                  } else {
+                    itemWidth = width;
+                  }
+
+                  return Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+
+                    children: [
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.person,
+                          title: 'Full Name',
+                          value: 'Jhon Reiven Nonsol',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.badge_outlined,
+                          title: 'Nickname',
+                          value: 'Kaka',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.cake_outlined,
+                          title: 'Age',
+                          value: '20 years old',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.calendar_month,
+                          title: 'Birthday',
+                          value: 'November 08, 2005',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.location_on_outlined,
+                          title: 'Address',
+                          value: 'Cabuyao, Laguna',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.sports_esports_outlined,
+                          title: 'Hobby',
+                          value: 'Programming, Gaming, Technology',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.format_quote,
+                          title: 'Motto',
+                          value:
+                              'Kung hindi mo sila kayang pigilan, '
+                              'ito nalang ay iyong sabayan.',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.school_outlined,
+                          title: 'Course / Program',
+                          value:
+                              'Bachelor of Science in Information Technology',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.groups_outlined,
+                          title: 'Year Level',
+                          value: '3rd Year',
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: itemWidth,
+                        child: _infoCard(
+                          icon: Icons.class_outlined,
+                          title: 'Section',
+                          value: '3IT-B',
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 35),
 
-            Card(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
+            // ============================================================
+            // ACADEMIC INFORMATION
+            // ============================================================
 
-              child: Padding(
-                padding: const EdgeInsets.all(8),
+            _sectionTitle(
+              icon: Icons.school_outlined,
+              title: 'Academic Information',
+              subtitle: 'My interests, skills, and goals',
+            ),
 
-                child: Column(
-                  children: const [
-                    // FAVORITE SUBJECT
-                    ListTile(
-                      leading: Icon(
-                        Icons.favorite,
-                        color: Colors.pinkAccent,
-                      ),
+            const SizedBox(height: 15),
 
-                      title: Text(
-                        'Favorite Subject',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth;
+
+                  double itemWidth;
+
+                  if (width >= 850) {
+                    itemWidth = (width - 24) / 3;
+                  } else if (width >= 550) {
+                    itemWidth = (width - 12) / 2;
+                  } else {
+                    itemWidth = width;
+                  }
+
+                  return Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+
+                    children: [
+                      SizedBox(
+                        width: itemWidth,
+                        child: _academicCard(
+                          icon: Icons.favorite,
+                          iconColor: Colors.pinkAccent,
+                          title: 'Favorite Subject',
+                          value: 'ITP107',
                         ),
                       ),
 
-                      subtitle: Text(
-                        'ITP107',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    // PROGRAMMING LANGUAGE
-                    ListTile(
-                      leading: Icon(
-                        Icons.code,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Programming Language',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: itemWidth,
+                        child: _academicCard(
+                          icon: Icons.code,
+                          iconColor: lightPurple,
+                          title: 'Programming Language',
+                          value: 'Java, PHP, JavaScript, Dart',
                         ),
                       ),
 
-                      subtitle: Text(
-                        'Java, PHP, JavaScript, and Dart',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    ListTile(
-                      leading: Icon(
-                        Icons.computer,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Technical Skill',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: itemWidth,
+                        child: _academicCard(
+                          icon: Icons.computer,
+                          iconColor: Colors.cyanAccent,
+                          title: 'Technical Skill',
+                          value:
+                              'Web Development and Database Management',
                         ),
                       ),
 
-                      subtitle: Text(
-                        'Web Development and Database Management',
-                      ),
-                    ),
-
-                    Divider(),
-
-                    ListTile(
-                      leading: Icon(
-                        Icons.work,
-                        color: lightPurple,
-                      ),
-
-                      title: Text(
-                        'Career Goal',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: itemWidth,
+                        child: _academicCard(
+                          icon: Icons.work_outline,
+                          iconColor: Colors.orangeAccent,
+                          title: 'Career Goal',
+                          value:
+                              'Become a professional Web Developer (WFH)',
                         ),
                       ),
 
-                      subtitle: Text(
-                        'Become a professional Web Developer (WFH)',
-                      ),
-                    ),
-
-                    Divider(),
-                    
-                    ListTile(
-                      leading: Icon(
-                        Icons.lightbulb,
-                        color: Colors.amber,
-                      ),
-
-                      title: Text(
-                        'Academic Interest',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: itemWidth,
+                        child: _academicCard(
+                          icon: Icons.lightbulb_outline,
+                          iconColor: Colors.amber,
+                          title: 'Academic Interest',
+                          value:
+                              'Web Development and Database Management',
                         ),
                       ),
-
-                      subtitle: Text(
-                        'Web Development and Database Management',
-                      ),
-                    ),
-                  ],
-                ),
+                    ],
+                  );
+                },
               ),
             ),
 
-            const SizedBox(height: 28),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: purple,
-                foregroundColor: Colors.white,
+            const SizedBox(height: 35),
 
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25,
-                  vertical: 13,
-                ),
+            // ============================================================
+            // MOTTO / QUOTE CARD
+            // ============================================================
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+
+              child: Card(
+                color: const Color(0xFF18121F),
 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
-                ),
-              ),
 
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Hello! Thanks for viewing my profile!',
-                    ),
+                  side: BorderSide(
+                    color: purple.withValues(alpha: 0.35),
                   ),
-                );
-              },
+                ),
 
-              icon: const Icon(
-                Icons.waving_hand,
-              ),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
 
-              label: const Text(
-                'Say Hello',
-              ),
-            ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-            const SizedBox(height: 8),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: lightPurple,
-              ),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
 
-              onPressed: () {
-                showDialog(
-                  context: context,
+                        decoration: BoxDecoration(
+                          color: purple.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                        ),
 
-                  builder: (context) {
-                    return AlertDialog(
-                      backgroundColor: darkCard,
-
-                      title: const Text(
-                        'About Me',
-                        style: TextStyle(
+                        child: const Icon(
+                          Icons.format_quote,
                           color: lightPurple,
-                          fontWeight: FontWeight.bold,
+                          size: 28,
                         ),
                       ),
 
-                      content: const Text(
-                        'I am a BSIT student interested in '
-                        'programming, technology, and software '
-                        'development.',
-                      ),
+                      const SizedBox(width: 15),
 
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
 
-                          child: const Text(
-                            'Close',
-                          ),
+                          children: [
+                            Text(
+                              'My Motto',
+                              style: TextStyle(
+                                color: lightPurple,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            SizedBox(height: 7),
+
+                            Text(
+                              '“Kung hindi mo sila kayang pigilan, '
+                              'ito nalang ay iyong sabayan.”',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                height: 1.5,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    );
-                  },
-                );
-              },
-
-              child: const Text(
-                'About Me',
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
 
             const SizedBox(height: 30),
+
+            // ============================================================
+            // BUTTONS
+            // ============================================================
+
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 12,
+              runSpacing: 12,
+
+              children: [
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: purple,
+                    foregroundColor: Colors.white,
+
+                    elevation: 8,
+
+                    shadowColor: purple.withValues(alpha: 0.4),
+
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 15,
+                    ),
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Hello! Thanks for viewing my profile!',
+                        ),
+                      ),
+                    );
+                  },
+
+                  icon: const Icon(
+                    Icons.waving_hand,
+                  ),
+
+                  label: const Text(
+                    'Say Hello',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+                TextButton.icon(
+                  style: TextButton.styleFrom(
+                    foregroundColor: lightPurple,
+
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 22,
+                      vertical: 15,
+                    ),
+                  ),
+
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: cardColor,
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+
+                          title: const Row(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                color: lightPurple,
+                              ),
+
+                              SizedBox(width: 10),
+
+                              Text(
+                                'About Me',
+                                style: TextStyle(
+                                  color: lightPurple,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          content: const Text(
+                            'I am Jhon Reiven Nonsol, a BSIT student '
+                            'who is interested in programming, '
+                            'technology, web development, and '
+                            'software development.',
+                          ),
+
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+
+                              child: const Text('Close'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+
+                  icon: const Icon(
+                    Icons.info_outline,
+                  ),
+
+                  label: const Text(
+                    'About Me',
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 35),
+
+            
+          ],
+        ),
+      ),
+    );
+  }
+
+ 
+  static Widget _badge({
+    required IconData icon,
+    required String text,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: 10,
+      ),
+
+      decoration: BoxDecoration(
+        color: purple.withValues(alpha: 0.15),
+
+        borderRadius: BorderRadius.circular(30),
+
+        border: Border.all(
+          color: purple.withValues(alpha: 0.5),
+        ),
+      ),
+
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+
+        children: [
+          Icon(
+            icon,
+            color: lightPurple,
+            size: 17,
+          ),
+
+          const SizedBox(width: 7),
+
+          Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget _statCard({
+    required IconData icon,
+    required String number,
+    required String label,
+  }) {
+    return Card(
+      color: cardColor,
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+
+        side: BorderSide(
+          color: purple.withValues(alpha: 0.2),
+        ),
+      ),
+
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+
+              decoration: BoxDecoration(
+                color: purple.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(15),
+              ),
+
+              child: Icon(
+                icon,
+                color: lightPurple,
+                size: 26,
+              ),
+            ),
+
+            const SizedBox(width: 14),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Text(
+                  number,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  
+
+  static Widget _sectionTitle({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+
+            decoration: BoxDecoration(
+              color: purple.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(14),
+            ),
+
+            child: Icon(
+              icon,
+              color: lightPurple,
+              size: 24,
+            ),
+          ),
+
+          const SizedBox(width: 12),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 3),
+
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  
+  static Widget _infoCard({
+    required IconData icon,
+    required String title,
+    required String value,
+  }) {
+    return Card(
+      color: cardColor,
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+
+        side: BorderSide(
+          color: Colors.white.withValues(alpha: 0.06),
+        ),
+      ),
+
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+
+              decoration: BoxDecoration(
+                color: purple.withValues(alpha: 0.13),
+                borderRadius: BorderRadius.circular(13),
+              ),
+
+              child: Icon(
+                icon,
+                color: lightPurple,
+                size: 22,
+              ),
+            ),
+
+            const SizedBox(width: 13),
+
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  Text(
+                    value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      height: 1.35,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget _academicCard({
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String value,
+  }) {
+    return Card(
+      color: softCard,
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+
+        side: BorderSide(
+          color: iconColor.withValues(alpha: 0.2),
+        ),
+      ),
+
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+
+              decoration: BoxDecoration(
+                color: iconColor.withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(15),
+              ),
+
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 27,
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            const SizedBox(height: 7),
+
+            Text(
+              value,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                height: 1.4,
+              ),
+            ),
           ],
         ),
       ),
