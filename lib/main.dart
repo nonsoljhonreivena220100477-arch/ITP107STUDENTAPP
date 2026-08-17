@@ -4,10 +4,6 @@ void main() {
   runApp(const StudentProfileApp());
 }
 
-// ============================================================
-// APP
-// ============================================================
-
 class StudentProfileApp extends StatelessWidget {
   const StudentProfileApp({super.key});
 
@@ -43,9 +39,6 @@ class StudentProfileApp extends StatelessWidget {
   }
 }
 
-// ============================================================
-// STUDENT PROFILE PAGE
-// ============================================================
 
 class StudentProfilePage extends StatelessWidget {
   const StudentProfilePage({super.key});
@@ -59,10 +52,6 @@ class StudentProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ========================================================
-      // APP BAR
-      // ========================================================
-
       appBar: AppBar(
         title: const Text(
           'Student Profile',
@@ -72,16 +61,12 @@ class StudentProfilePage extends StatelessWidget {
         ),
       ),
 
-      // ========================================================
-      // BODY
-      // ========================================================
+    
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // ==================================================
-            // PROFILE HEADER
-            // ==================================================
+           
 
             Container(
               width: double.infinity,
@@ -105,10 +90,7 @@ class StudentProfilePage extends StatelessWidget {
 
               child: Column(
                 children: [
-                  // ============================================
-                  // PROFILE IMAGE
-                  // ============================================
-
+                 
                   Container(
                     width: 130,
                     height: 130,
@@ -151,10 +133,6 @@ class StudentProfilePage extends StatelessWidget {
 
                   const SizedBox(height: 18),
 
-                  // ============================================
-                  // FULL NAME
-                  // ============================================
-
                   const Text(
                     'JHON REIVEN NONSOL',
                     textAlign: TextAlign.center,
@@ -168,10 +146,6 @@ class StudentProfilePage extends StatelessWidget {
 
                   const SizedBox(height: 5),
 
-                  // ============================================
-                  // NICKNAME
-                  // ============================================
-
                   const Text(
                     '"Kaka"',
                     style: TextStyle(
@@ -182,10 +156,6 @@ class StudentProfilePage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 20),
-
-                  // ============================================
-                  // ROW - COURSE AND YEAR LEVEL
-                  // ============================================
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -229,7 +199,7 @@ class StudentProfilePage extends StatelessWidget {
 
                       const SizedBox(width: 10),
 
-                      // YEAR LEVEL
+                    
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 15,
@@ -273,10 +243,6 @@ class StudentProfilePage extends StatelessWidget {
 
             const SizedBox(height: 28),
 
-            // ==================================================
-            // PERSONAL INFORMATION TITLE
-            // ==================================================
-
             const Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
@@ -297,10 +263,6 @@ class StudentProfilePage extends StatelessWidget {
             ),
 
             const SizedBox(height: 10),
-
-            // ==================================================
-            // PERSONAL INFORMATION CARD
-            // ==================================================
 
             Card(
               margin: const EdgeInsets.symmetric(
@@ -333,7 +295,7 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // NICKNAME
+                 
                     ListTile(
                       leading: Icon(
                         Icons.badge,
@@ -375,7 +337,7 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // BIRTHDAY
+                   
                     ListTile(
                       leading: Icon(
                         Icons.calendar_month,
@@ -396,7 +358,7 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // ADDRESS
+                   
                     ListTile(
                       leading: Icon(
                         Icons.location_on,
@@ -417,7 +379,7 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // HOBBY
+                  
                     ListTile(
                       leading: Icon(
                         Icons.sports_esports,
@@ -438,7 +400,7 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // MOTTO
+                  
                     ListTile(
                       leading: Icon(
                         Icons.format_quote,
@@ -481,7 +443,7 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // YEAR LEVEL
+                    
                     ListTile(
                       leading: Icon(
                         Icons.groups,
@@ -527,10 +489,6 @@ class StudentProfilePage extends StatelessWidget {
 
             const SizedBox(height: 28),
 
-            // ==================================================
-            // ACADEMIC INFORMATION TITLE
-            // ==================================================
-
             const Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
@@ -551,10 +509,6 @@ class StudentProfilePage extends StatelessWidget {
             ),
 
             const SizedBox(height: 10),
-
-            // ==================================================
-            // ACADEMIC INFORMATION CARD
-            // ==================================================
 
             Card(
               margin: const EdgeInsets.symmetric(
@@ -608,7 +562,6 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // TECHNICAL SKILL
                     ListTile(
                       leading: Icon(
                         Icons.computer,
@@ -629,7 +582,6 @@ class StudentProfilePage extends StatelessWidget {
 
                     Divider(),
 
-                    // CAREER GOAL
                     ListTile(
                       leading: Icon(
                         Icons.work,
@@ -649,8 +601,7 @@ class StudentProfilePage extends StatelessWidget {
                     ),
 
                     Divider(),
-
-                    // ACADEMIC INTEREST
+                    
                     ListTile(
                       leading: Icon(
                         Icons.lightbulb,
@@ -674,11 +625,6 @@ class StudentProfilePage extends StatelessWidget {
             ),
 
             const SizedBox(height: 28),
-
-            // ==================================================
-            // SAY HELLO BUTTON
-            // ==================================================
-
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: purple,
@@ -714,11 +660,6 @@ class StudentProfilePage extends StatelessWidget {
             ),
 
             const SizedBox(height: 8),
-
-            // ==================================================
-            // ABOUT ME BUTTON
-            // ==================================================
-
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: lightPurple,
